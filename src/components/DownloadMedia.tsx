@@ -1,5 +1,6 @@
 import React from 'react';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Toast } from '@capacitor/toast';
 import { DownloadMediaProps } from '../interfaces/DownloadMedia';
 
 const DownloadButton = ({ downloadUrl, fileName }: DownloadMediaProps) => {
@@ -7,12 +8,16 @@ const DownloadButton = ({ downloadUrl, fileName }: DownloadMediaProps) => {
       try{
         console.log({downloadUrl, fileName})
           const response = await Filesystem.downloadFile({
-              url: downloadUrl,
-              path: fileName,
+            url: downloadUrl,
+            path: fileName,
             directory: Directory.Documents,
-            // url: 'https://www.w3.org/TR/2003/REC-PNG-20031110/iso_8859-1.txt',
-            // path: 'deel.txt',
-        })
+            // url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            // path: 'dummy.pdf',
+            // directory: Directory.Documents,
+          })
+          Toast.show({
+            text: `${fileName} downloaded successfully`,
+          });
         console.log({response})
     }
       catch (error) {
@@ -29,6 +34,7 @@ const DownloadButton = ({ downloadUrl, fileName }: DownloadMediaProps) => {
 
 const styles = {
   button: {
+    width: '100%',
     backgroundColor: '#3498db',
     color: '#fff',
     padding: '10px 15px',
@@ -36,6 +42,7 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     fontSize: '16px',
+    marginTop: 20
   },
 };
 
