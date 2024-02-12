@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import payslipData from '../assets/data/mock.json'
 import { Payslip, PayslipItemProps } from '../interfaces/Payslip';
-
+import { Capacitor } from '@capacitor/core';
 
 
 const PayslipItem = ({item, onClick}: PayslipItemProps) => {
@@ -18,7 +18,7 @@ const PayslipItem = ({item, onClick}: PayslipItemProps) => {
 };
 
 const PayslipScreen = () => {
-  alert('PayslipScreen')
+  const platform = Capacitor.getPlatform();
   const navigate = useNavigate();
   const [payslips, setPayslips] = useState<Payslip[]>([]);
   
@@ -33,7 +33,7 @@ const PayslipScreen = () => {
   }, [payslipData.data]);
 
   return (
-    <div style={styles.container}>
+    <div style={platform === 'ios' ? styles.iOSContainer : styles.container}>
       <p style={styles.header}>Payslips</p>
       {payslips.map((item: Payslip) => (
         <PayslipItem key={item.id} item={item} onClick={(id) => router.push(`/payslipDetail/${id}`)} />
@@ -45,6 +45,10 @@ const PayslipScreen = () => {
 const styles = {
   container: {
     padding: 16,
+  },
+  iOSContainer: {
+    padding: 16,
+    marginTop: 40,
   },
   header: {
     fontSize: 20,
