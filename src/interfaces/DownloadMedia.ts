@@ -1,5 +1,5 @@
 export interface DownloadMediaProps {
-    url: string;
+    downloadUrl: string;
     fileName: string;
 }
   

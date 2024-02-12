@@ -4,6 +4,7 @@ import { Capacitor } from '@capacitor/core';
 import { Payslip } from "../interfaces/Payslip";
 import payslipData from "../assets/data/mock.json";
 import Header from "../components/Header";
+import DownloadButton from "../components/DownloadMedia";
 
 const PayslipDetailScreen = () => {
   let { id } = useParams();
@@ -52,6 +53,7 @@ const PayslipDetailScreen = () => {
             {payslip.file.fileName}
           </p>
         </div>
+        <DownloadButton  downloadUrl={payslip.file.fileUrl} fileName={payslip.file.fileName}  />
       </div>
     </div>
   );

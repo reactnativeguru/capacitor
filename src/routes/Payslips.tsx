@@ -4,7 +4,6 @@ import payslipData from '../assets/data/mock.json'
 import { Payslip, PayslipItemProps } from '../interfaces/Payslip';
 import { Capacitor } from '@capacitor/core';
 
-
 const PayslipItem = ({item, onClick}: PayslipItemProps) => {
   return (
     <div onClick={() => onClick(item.id)}>
